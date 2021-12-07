@@ -179,7 +179,11 @@ pre code {
 <p>Nejdřív je důležitý se na zákrok připravit, proto si nainstaluj tyhle zcela balíčky skrze příkaz: install.packages(“balíček”)</p>
 <p>“SnowballC” -&gt; klíčový pro “text stemming”<br />
 “wordcloud” -&gt; to je docela očividný, viď! vono to nebude tak těžký nakonec.<br />
-“RColorBrewer” -&gt; pro všechny visual driven jedince klíčovej balíček aneb vymaluj si svůj mráček “stopwords” -&gt; databáze stop slov v různejch jazycích + dobrých stop slov pro stemming “quanteda” -&gt; balíček, který využijeme pro odstranění bezvýznamnových slov - proč?: <a href="https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining" class="uri">https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining</a> + další skvělá dokumentace zde: <a href="https://quanteda.io/articles/pkgdown/quickstart.html#creating-a-corpus" class="uri">https://quanteda.io/articles/pkgdown/quickstart.html#creating-a-corpus</a> “readtext” -&gt; čtení slov z .txt “quanteda.textplots” -&gt; rozšíření quantedy pro tvorbu wordcloudů “quanteda.textstats” -&gt; rozšíření quantedy pro tvorbu grafů z textu “ggplot2” -&gt; snad ani nemusím představovat:-)</p>
+“RColorBrewer” -&gt; pro všechny visual driven jedince klíčovej balíček aneb vymaluj si svůj mráček “stopwords” -&gt; databáze stop slov v různejch jazycích + dobrých stop slov pro stemming<br />
+“quanteda” -&gt; balíček, který využijeme pro odstranění bezvýznamnových slov - proč?: <a href="https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining" class="uri">https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining</a> + další skvělá dokumentace zde: <a href="https://quanteda.io/articles/pkgdown/quickstart.html#creating-a-corpus" class="uri">https://quanteda.io/articles/pkgdown/quickstart.html#creating-a-corpus</a> “readtext” -&gt; čtení slov z .txt<br />
+“quanteda.textplots” -&gt; rozšíření quantedy pro tvorbu wordcloudů<br />
+“quanteda.textstats” -&gt; rozšíření quantedy pro tvorbu grafů z textu<br />
+“ggplot2” -&gt; snad ani nemusím představovat:-)</p>
 <p>Po instalaci všechny balíčky zapni skrz příkaz: library(“balíček”). Pro milovníky oken se dají balíčky hledat a zapínat vpravo dole: <a href="https://i.imgur.com/8Z3MsGA.png" class="uri">https://i.imgur.com/8Z3MsGA.png</a></p>
 <pre class="r"><code>library(&quot;quanteda&quot;)</code></pre>
 <pre><code>## Package version: 3.2.0

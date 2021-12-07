@@ -16,12 +16,12 @@ Nejdřív je důležitý se na zákrok připravit, proto si nainstaluj tyhle zce
 "SnowballC" -> klíčový pro "text stemming"   
 "wordcloud" -> to je docela očividný, viď! vono to nebude tak těžký nakonec.   
 "RColorBrewer" -> pro všechny visual driven jedince klíčovej balíček aneb vymaluj si svůj mráček 
-"stopwords" -> databáze stop slov v různejch jazycích + dobrých stop slov pro stemming
+"stopwords" -> databáze stop slov v různejch jazycích + dobrých stop slov pro stemming  
 "quanteda" -> balíček, který využijeme pro odstranění bezvýznamnových slov - proč?: https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining + další skvělá dokumentace zde: https://quanteda.io/articles/pkgdown/quickstart.html#creating-a-corpus
-"readtext" -> čtení slov z .txt
-"quanteda.textplots" -> rozšíření quantedy pro tvorbu wordcloudů
-"quanteda.textstats" -> rozšíření quantedy pro tvorbu grafů z textu
-"ggplot2" -> snad ani nemusím představovat:-)
+"readtext" -> čtení slov z .txt  
+"quanteda.textplots" -> rozšíření quantedy pro tvorbu wordcloudů  
+"quanteda.textstats" -> rozšíření quantedy pro tvorbu grafů z textu  
+"ggplot2" -> snad ani nemusím představovat:-)  
   
 Po instalaci všechny balíčky zapni skrz příkaz: library("balíček"). Pro milovníky oken se dají balíčky hledat a zapínat vpravo dole: https://i.imgur.com/8Z3MsGA.png 
   
