@@ -150,6 +150,8 @@ ggplot(FrequencyPlot, aes(x = feature, y = frequency)) +
 ```
 
 
+
+
 # Odkazy na zdroje
 
 Neseřazeno, jak jsem to pomíchal, tak to sem posílám  
