@@ -1,0 +1,162 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# *Nejlepšejší návod na vstup do Matrixu*  
+  
+Připrav si ručník, nepanikař, poděkuj rybám a jdem na to!  
+  
+## Příprava Rka  
+  
+Nejdřív je důležitý se na zákrok připravit, proto si nainstaluj tyhle zcela balíčky skrze příkaz: install.packages("balíček")  
+  
+"SnowballC" -> klíčový pro "text stemming"   
+"wordcloud" -> to je docela očividný, viď! vono to nebude tak těžký nakonec.   
+"RColorBrewer" -> pro všechny visual driven jedince klíčovej balíček aneb vymaluj si svůj mráček 
+"stopwords" -> databáze stop slov v různejch jazycích + dobrých stop slov pro stemming
+"quanteda" -> balíček, který využijeme pro odstranění bezvýznamnových slov - proč?: https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining + další skvělá dokumentace zde: https://quanteda.io/articles/pkgdown/quickstart.html#creating-a-corpus
+"readtext" -> čtení slov z .txt
+"quanteda.textplots" -> rozšíření quantedy pro tvorbu wordcloudů
+"quanteda.textstats" -> rozšíření quantedy pro tvorbu grafů z textu
+"ggplot2" -> snad ani nemusím představovat:-)
+  
+Po instalaci všechny balíčky zapni skrz příkaz: library("balíček"). Pro milovníky oken se dají balíčky hledat a zapínat vpravo dole: https://i.imgur.com/8Z3MsGA.png 
+  
+```{r}
+library("quanteda")
+library("readtext")
+library("stopwords")
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library("quanteda.textplots")
+library("quanteda.textstats")
+library("ggplot2")
+```
+  
+## Příprava textu k mráčkování
+  
+Teď je ten moment, kdy chcem zjistit, co chceme zpracovávat. Já třeba žiju rád nebezpečně, takže jsem šel na infamous stránku Library Genesis (https://libgen.is/). Rozhodl jsem se zpracovat knihu z mého oblíbeného žánru magickýho realismu - Konec světa&Hardboiled Wonderland od Murakamiho.  
+  
+Většina knih je na Libgenu ve formátu .epub. Já zvolil nejjednodušší cestu a jako vstup do celého procesu textového těžení jsem si zvolil .txt. Konverze je poměrně jednoduchá, využít se dá například tato služba: https://convertio.co/epub-txt/. Netřeba za tím hledat nástrahy, jde o přímočarý proces.   
+  
+## Konečně kódujem, hurá
+  
+Textovej soubor s knížkou teda máme. Ten chceme naloadovat, což provedeme tímto příkazem  
+  
+```{r}
+KonecSvěta <- readtext("C:/Users/Tadeáš/Desktop/ukol menzy/data murakami/Murakami.txt")
+```
+  
+Pokud nevíš, jak jednoduše vykopírovat cestu k souboru, tak je to tady:   
+  
+Dál potřebujeme z toho .txt vytahat slova, aby mu Rko rozumnělo a mohli jsme s tím pracovat dál. Proto budeme z .txt dělat datovej korpus.   
+  
+Rko zná několik druhů datovejch korpusů, což tady trochu rozvinu, protože to dobře osvětluje, proč se slovama pak umíme pracovat.   
+  
+Většina návodů a dokumentací (no dobře, viděl jsem dvě, ale byli první na googlu a nepředpokládám, že někdo z vás klikal i na další!!) doporučuje pro vytvoření korpusu použít příkaz Corpus. To samozřejmě bude fungovat. 
+Jenže já jsem rejpavej a všiml jsem si jednoho drobnýho problému. Příkaz Corpus používá defaultně SimpleCorpus, který není úplně ideální na analýzu textu. Obzvlášť v češtině.   
+  
+Proč? Tady budu citovat uživatele f0nzie, který na oblíbeném formu StackOverflow: "SimpleCorpus will not allow you to keep dashes, underscores or other signs of punctuation"  
+  
+To v češtině není úplně košer, protože článek o historii nejstaršího pekařství na světě by nám pak vyhazoval dlouhověký veky co žijou na věky a to by nás mátlo.  
+  
+f0nzie proto doporučuje používat VCorpus. Podrobné důvody si můžete přečíst třeba tady: https://stats.stackexchange.com/questions/164372/what-is-vectorsource-and-vcorpus-in-tm-text-mining-package-in-r  
+  
+Pojďme to už teda konečně udělat!  
+
+```{r}
+KorpusWonderland <- corpus(KonecSveta)
+summary(KorpusWonderland)
+```
+
+To, jak data v korpusu vypadají si můžeš zkontrolovat skrz tenhle příkaz:
+
+```{r}
+as.character(KorpusWonderland)[2]
+summary(KorpusWonderland, n = 1)
+```
+```{r}
+tokens(KorpusWonderland, remove_numbers = TRUE, remove_punct = TRUE, remove_symbols = TRUE, remove_url = TRUE, remove_separators = TRUE)
+```
+```{r}
+Tokeny <- tokens(KorpusWonderland, remove_numbers = TRUE, remove_punct = TRUE, remove_symbols = TRUE, remove_url = TRUE, remove_separators = TRUE)
+```
+
+
+```{r}
+MaleTokeny <- tokens_tolower(Tokeny, keep_acronyms = FALSE)
+```
+
+
+
+```{r}
+CisteTokeny <- tokens_select(MaleTokeny, pattern = stopwords(language = "en", source = "snowball", simplify = TRUE), selection = "remove")
+print(CisteTokeny)
+```
+"Tokenizing texts is an intermediate option, and most users will want to skip straight to constructing a document-feature matrix"
+
+```{r}
+ManualniNiceni <- tokens_select(CisteTokeny, pattern = c("said", "like", "one", "say", "can", "go", "right"), selection = "remove")
+```
+
+```{r}
+MatrixWonderland <- tokens(ManualniNiceni) %>%
+  dfm()
+MatrixWonderland[, 1:30]
+```
+```{r}
+MatrixWonderland <- dfm_wordstem(MatrixWonderland)
+```
+
+```{r}
+topfeatures(MatrixWonderland, 20)
+```
+
+```{r}
+set.seed(100)
+textplot_wordcloud(MatrixWonderland, min_count = 100, random_order = FALSE, rotation = 0.25, color = RColorBrewer::brewer.pal(9, "YlGnBu"))
+```
+
+
+```{r}
+FrequencyPlot <- textstat_frequency(MatrixWonderland, n = 100)
+FrequencyPlot$feature <- with(FrequencyPlot, reorder(feature, -frequency))
+```
+
+```{r}
+ggplot(FrequencyPlot, aes(x = feature, y = frequency)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+# Odkazy na zdroje
+
+Neseřazeno, jak jsem to pomíchal, tak to sem posílám  
+  
+https://quanteda.io/articles/pkgdown/examples/plotting.html  
+https://stackoverflow.com/questions/47039236/how-to-keep-wordcloud-layout-in-r  
+https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining -> proto quanteda, tm sucks!  
+https://quanteda.io/articles/pkgdown/comparison.html -> proto quanteda, je prostě dobrá! na kvantitativní analýzu textu není nic lepšího  
+https://quanteda.io/reference/tokens.html -> Jak používat tokeny  
+https://tutorials.quanteda.io/basic-operations/tokens/tokens_select/ -> jak vybrat a odstranit tokeny, který nechcem     
+https://quanteda.io/reference/stopwords.html -> stopwords   
+  
+https://quanteda.io/reference/tokens_tolower.html -> jak hodit vše do lowercase  
+  
+https://quanteda.io/articles/quickstart.html -> základní návod na to, jak nahrát .txt, jak ho přečíst, jak ho převést do corpusu, jak pracovat s tokenama a jak udělat wordcloud případně vizualizovat ggplotem  
+  
+https://quanteda.io/articles/pkgdown/examples/plotting.html -> širší možnosti vizualizace  
+  
+https://quanteda.io/reference/textplot_wordcloud.html -> values pro wordcloud v quantedě  
+
+https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/#display-all-brewer-palettes -> rcolorbrewer palety
+
+Palety textově:
+Sequential palettes (first list of colors), which are suited to ordered data that progress from low to high (gradient). The palettes names are : Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu YlOrBr, YlOrRd.  
+Qualitative palettes (second list of colors), which are best suited to represent nominal or categorical data. They not imply magnitude differences between groups. The palettes names are : Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3.  
+Diverging palettes (third list of colors), which put equal emphasis on mid-range critical values and extremes at both ends of the data range. The diverging palettes are : BrBG, PiYG, PRGn, PuOr, RdBu, RdGy, RdYlBu, RdYlGn, Spectral  
+
+
+## Tipy na konec

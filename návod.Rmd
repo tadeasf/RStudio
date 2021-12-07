@@ -1,0 +1,103 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Nejdřív si plsky nainstaluj tyto balíčky, anžto budou pro nás klíčové
+# - následující věci musim uvést takhle, nebude to vypadat jako R kód, ale jinak to nejde vyexportovat
+ install.packages("tm")  # for text mining
+ install.packages("SnowballC") # for text stemming
+ install.packages("wordcloud") # word-cloud generator 
+ install.packages("RColorBrewer") # color palettes
+
+# Násladně si je nahraj
+```{r}
+library("tm")
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+```
+# Nejdřív si stáhni tedy nějakou knihu, třeba z library genesis. Ta bude v .epub formátu. My chceme .txt formát. K převodu použij třeba tuto stránku: https://convertio.co/epub-txt/
+# dál chcem tenhle soubor naloudovat, to uděláme tímto příkazem
+```{r}
+JménoTvéhoVyvoleného <- readLines(file.choose())
+```
+# Nelekni se, otevře se ti normálně finder a klikneš si na ten svůj souborek
+# Dalším krokem je udělání z toho .txt korpus! To je naprosto klíčový
+```{r}
+KorpusTvéhoVyvoleného <- Corpus(VectorSource(JménoTvéhoVyvoleného))
+```
+#po téhle náročné aktivity to čekni, opět neuvádím jako kód, aby to nebyl zasraně dlouhej dokument:-)
+
+inspect(KorpusTvéhoVyvoleného)
+
+# teď budeme tenhle korpus čistit a dělat z něj obecně partnera se kterým se nám bude v životě lépe vycházet. k tomu použijeme skvělou knihovnu tm_map, níže najdeš fajnovky, který z ní můžeš tahat
+# lower case všeho
+```{r}
+KorpusTvéhoVyvoleného <- tm_map(KorpusTvéhoVyvoleného, content_transformer(tolower))
+```
+# odstraň čísla, čísla smrdí
+```{r}
+KorpusTvéhoVyvoleného <- tm_map(KorpusTvéhoVyvoleného, removeNumbers)
+```
+# odstraň anglický stopwords
+```{r}
+KorpusTvéhoVyvoleného <- tm_map(KorpusTvéhoVyvoleného, removeWords, stopwords("english"))
+```
+# taky si můžeš odstranit svoje vlastní slova :O... třeba když se ti nelíbí něčí jméno, tak ho prostě smaž! podle mě třeba Radek je fakt vošklivý jméno...
+```{r}
+KorpusTvéhoVyvoleného <- tm_map(KorpusTvéhoVyvoleného, removeWords, c("Radek", "Šlerka", "Josef", "povinnosti"))
+```
+# co nám dělá problém největší? jako čechům? aha? tak to dáme pryč!
+```{r}
+KorpusTvéhoVyvoleného <- tm_map(KorpusTvéhoVyvoleného, removePunctuation)
+```
+# pak dáme pryč mezery
+```{r}
+KorpusTvéhoVyvoleného <- tm_map(KorpusTvéhoVyvoleného, stripWhitespace)
+```
+
+# tím máme text už docela očištění a vznikl nám tolik potřebný Lebensraum. Stojíme před důležitou volbou, zda vstoupit do Matrixu. Což chceme. Vezmeme si červenou pilulku a uděláme z našeho korpusu tabulku, která obsahuje frekvenci jednotlivých slov
+```{r}
+VolímČERVENOU <- TermDocumentMatrix(KorpusTvéhoVyvoleného)
+```
+
+# pak mu přidáme nějaký ty charakteristiky, to ti vysvětlovat nebudu, prostě to chceš!
+```{r}
+m <- as.matrix(VolímČERVENOU)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+```
+
+
+# voalá a máš vytištěných top 10 nejčastějších slov. teď už moc nestíhám, za 20 minut bych se měl osprchovat, abych nejel do kanclu a nebyl porostlej pomalu mechem - A PROTO - pojďme si vytvořit Word cloud!
+
+```{r}
+set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+
+# co která funkce u word cloudu dělá?
+# words : z jakejch slov chceme matrix dělat
+# freq : jejich frekvence
+# min.freq : je to treshhold kdy vyhodíš málo častý slova
+# max.words : maximum number of words to be plotted
+# random.order : chcem slova zobrazovat náhodně nebo budou velký podle toho, kolik jich tam je a odrážet tak ve wordcloudu svůj počet?
+# rot.per : jak dlouhý slova budou zobrazovaný vertikálně
+# colors : zabarví slova od nejčastěji zobrazovaných po nejméně. dokumentace k word cloudu a další funkce a možnosti najdeš zde: https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf
+
+
+# další zábavné funkce mohou být třeba frekvenci výrazů a jejich asociace. můžem se podívat třeba na frekvenci slov v matrixu - tenhle příkaz nám ukáže slova, který tam jsou alespoň dvěstěkrát
+```{r}
+findFreqTerms(VolímČERVENOU, lowfreq = 200)
+```
+# no a pak třeba můžeš najít nejčastějí asociace k určitejm slovům. já zpracovával murakamiho knížku, která se jmenovala konec světa, tak jsem vybral termín "world", ať víme, jestli tam svět dělá i něco jinýho, než aby akorát končil.
+```{r}
+findAssocs(VolímČERVENOU, terms = "world", corlimit = 0.3)
+```
+
+# A na týhle vlně končim. Svět skončí. Musím do práce. Pláču. Vidím stíny. Čas. A jenom vím, že jsem jedno zrnko písku!
