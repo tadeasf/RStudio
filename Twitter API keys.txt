@@ -1,0 +1,6 @@
+App: TestujuProR
+API Key: 7KVUurkhWliO0ts0Fm3mluiSR
+API key Secret: vd78YntykzpiPFms1lnlVorcNdymuZ2oHW09a86wJzLSzxXkkg
+Access Token: 933740502549229568-9OQgh7wqIPFQFgbQ84ttJWMWVEZQKu3
+Access Token Secret: antIsCf92vb2TJqoNIw51Vm4wGhMQbgsgG3SVGKzb2hbq
+Bearer Token: AAAAAAAAAAAAAAAAAAAAADcHOwEAAAAA26gWzvlcwOAAhY7Z%2FpCmge7VuVk%3DmFUjfSWlPYAPRmqAPqiKaTO0LMDeZ94NSR7iXVzCXf9tsTkHeV

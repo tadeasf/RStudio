@@ -1,0 +1,524 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Úvod do kvantitativní textové analýzy},
+  pdfauthor={Tadeášek},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Úvod do kvantitativní textové analýzy}
+\author{Tadeášek}
+\date{12/7/2021}
+
+\begin{document}
+\maketitle
+
+\hypertarget{nejlepux161ejux161uxed-nuxe1vod-na-vstup-do-matrixu}{%
+\section{\texorpdfstring{\emph{Nejlepšejší návod na vstup do
+Matrixu}}{Nejlepšejší návod na vstup do Matrixu}}\label{nejlepux161ejux161uxed-nuxe1vod-na-vstup-do-matrixu}}
+
+Připrav si ručník, nepanikař, poděkuj rybám a jdem na to!
+
+\hypertarget{pux159uxedprava-rka}{%
+\subsection{Příprava Rka}\label{pux159uxedprava-rka}}
+
+Nejdřív je důležitý se na zákrok připravit, proto si nainstaluj tyhle
+zcela balíčky skrze příkaz: install.packages(``balíček'')
+
+``SnowballC'' -\textgreater{} klíčový pro ``text stemming''\\
+``wordcloud'' -\textgreater{} to je docela očividný, viď! vono to nebude
+tak těžký nakonec.\\
+``RColorBrewer'' -\textgreater{} pro všechny visual driven jedince
+klíčovej balíček aneb vymaluj si svůj mráček ``stopwords''
+-\textgreater{} databáze stop slov v různejch jazycích + dobrých stop
+slov pro stemming\\
+``quanteda'' -\textgreater{} balíček, který využijeme pro odstranění
+bezvýznamnových slov - proč?:
+\url{https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining}
++ další skvělá dokumentace zde:
+\url{https://quanteda.io/articles/pkgdown/quickstart.html\#creating-a-corpus}
+``readtext'' -\textgreater{} čtení slov z .txt\\
+``quanteda.textplots'' -\textgreater{} rozšíření quantedy pro tvorbu
+wordcloudů\\
+``quanteda.textstats'' -\textgreater{} rozšíření quantedy pro tvorbu
+grafů z textu\\
+``ggplot2'' -\textgreater{} snad ani nemusím představovat:-)
+
+Po instalaci všechny balíčky zapni skrz příkaz: library(``balíček'').
+Pro milovníky oken se dají balíčky hledat a zapínat vpravo dole:
+\url{https://i.imgur.com/8Z3MsGA.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"quanteda"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Package version: 3.2.0
+## Unicode version: 13.0
+## ICU version: 69.1
+\end{verbatim}
+
+\begin{verbatim}
+## Parallel computing: 12 of 12 threads used.
+\end{verbatim}
+
+\begin{verbatim}
+## See https://quanteda.io for tutorials and examples.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"readtext"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"stopwords"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"SnowballC"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"wordcloud"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: RColorBrewer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"RColorBrewer"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"quanteda.textplots"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"quanteda.textstats"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pux159uxedprava-textu-k-mruxe1ux10dkovuxe1nuxed}{%
+\subsection{Příprava textu k
+mráčkování}\label{pux159uxedprava-textu-k-mruxe1ux10dkovuxe1nuxed}}
+
+Teď je ten moment, kdy chcem zjistit, co chceme zpracovávat. Já třeba
+žiju rád nebezpečně, takže jsem šel na infamous stránku Library Genesis
+(\url{https://libgen.is/}). Rozhodl jsem se zpracovat knihu z mého
+oblíbeného žánru magickýho realismu - Konec světa\&Hardboiled Wonderland
+od Murakamiho.
+
+Většina knih je na Libgenu ve formátu .epub. Já zvolil nejjednodušší
+cestu a jako vstup do celého procesu textového těžení jsem si zvolil
+.txt. Konverze je poměrně jednoduchá, využít se dá například tato
+služba: \url{https://convertio.co/epub-txt/}. Netřeba za tím hledat
+nástrahy, jde o přímočarý proces.
+
+\hypertarget{koneux10dnux11b-kuxf3dujem-huruxe1}{%
+\subsection{Konečně kódujem,
+hurá}\label{koneux10dnux11b-kuxf3dujem-huruxe1}}
+
+Textovej soubor s knížkou teda máme. Ten chceme naloadovat. Tady už
+zjistíme, že se můj kód mění od referečního, který používá knihovnu
+textmining (tm). Po intenzivním googlení jsem usoudil, že nejlepším
+nástrojem na kvantitativní textovou analýzu je quanteda. Ta má trochu
+jiné nástroje než tm, ale zas mi to pomohlo pochopit fungování Rka o
+něco lépe.
+
+Nejdřív načteme slova z našeho textového souboru do datasetu:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KonecSvěta }\OtherTok{\textless{}{-}} \FunctionTok{readtext}\NormalTok{(}\StringTok{"\textasciitilde{}/GitHub/RStudio/data murakami/Murakami.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Pokud nevíš, jak jednoduše vykopírovat cestu k souboru, tak je to tady:
+\includegraphics{copypath.png}
+
+Teď budeme potřebovat Corpus. Výhoda quantedy je třeba v tom, že data v
+Corpusu při čištění nemění - využívá místo toho tokeny. Token se vytvoří
+takto:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KorpusWonderland }\OtherTok{\textless{}{-}} \FunctionTok{corpus}\NormalTok{(KonecSveta)}
+\FunctionTok{summary}\NormalTok{(KorpusWonderland)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Corpus consisting of 1 document, showing 1 document:
+## 
+##          Text Types Tokens Sentences
+##  Murakami.txt 12571 144076     11856
+\end{verbatim}
+
+Je vidět, že Corpus je teď zmatenej, potřebujeme mu říct, co v textu je,
+z čeho má tokeny vytvářet - obecně v Rku používáme vektory, který nám
+říkaj, co daná věc znamená - mohou to být čísla, data, jména, roky! V
+tomhle případě nám ale bude stačit jednoduchý charakterový vektor. - to
+je první část kódu
+
+V druhé části si připravíme Tokeny, které potom můžeme dále čistit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.character}\NormalTok{(KorpusWonderland)[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <NA> 
+##   NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(KorpusWonderland, }\AttributeTok{n =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Corpus consisting of 1 document, showing 1 document:
+## 
+##          Text Types Tokens Sentences
+##  Murakami.txt 12571 144076     11856
+\end{verbatim}
+
+Nyní připravíme tokeny v samotném korpusu. Jde použít jen neinvazivní
+příkazy - použil jsem naprostou většinu z nich, více v dokumentaci o
+quantedě.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tokens}\NormalTok{(KorpusWonderland, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_symbols =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_url =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_separators =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Tokens consisting of 1 document.
+## Murakami.txt :
+##  [1] "HARD-BOILED" "WONDERLAND"  "AND"         "THE"         "END"        
+##  [6] "OF"          "THE"         "WORLD"       "by"          "Haruki"     
+## [11] "Murakami"    "TRANSLATED" 
+## [ ... and 116,762 more ]
+\end{verbatim}
+
+Teď si vytvořím separátní set tokenů - v tom je zase quanteda lepší než
+tm - TM zasahuje při čištění přímo do korpusu, kdežto v quantedě
+předcházíme případné ztrátě dat a progresu již takto. Následujícím
+příkazem vytváříme data set Tokeny, který obsahuje tokeny z našeho
+korpusu.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Tokeny }\OtherTok{\textless{}{-}} \FunctionTok{tokens}\NormalTok{(KorpusWonderland, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_symbols =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_url =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_separators =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+V dalším kroku chci, aby bylo všechno v lowercase, na to je tento příkaz
+(tady používám dokumentaci, nic složitého)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MaleTokeny }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_tolower}\NormalTok{(Tokeny, }\AttributeTok{keep\_acronyms =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+No a ted prichazi zajimavejsi cast. Chci se zbavit bezvyznamovych slow
+(a, the,\ldots). Na to vyuziju balicek stopwords. Opět, balíček tm
+využívat externí stopwords neumí, už ten příkaz v sobě má a je dost na
+prd. V quantedě můžeme využít snowball stopwords databázi.
+
+příkaz je následující - vyberu z malých tokenů ty, které odpovídají
+databázi stopwords od snowball a pak řeknu, že jejich označení znamená,
+že je odstraním
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CisteTokeny }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_select}\NormalTok{(MaleTokeny, }\AttributeTok{pattern =} \FunctionTok{stopwords}\NormalTok{(}\AttributeTok{language =} \StringTok{"en"}\NormalTok{, }\AttributeTok{source =} \StringTok{"snowball"}\NormalTok{, }\AttributeTok{simplify =} \ConstantTok{TRUE}\NormalTok{), }\AttributeTok{selection =} \StringTok{"remove"}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(CisteTokeny)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Tokens consisting of 1 document.
+## Murakami.txt :
+##  [1] "hard-boiled" "wonderland"  "end"         "world"       "haruki"     
+##  [6] "murakami"    "translated"  "japanese"    "alfred"      "birnbaum"   
+## [11] "haruki"      "murakami"   
+## [ ... and 57,085 more ]
+\end{verbatim}
+
+Dostala ses až sem? Tak trocha egoboostu, tohle píšou v dokumentaci ke
+quantedě ``Tokenizing texts is an intermediate option, and most users
+will want to skip straight to constructing a document-feature matrix''
+
+Pokračujeme ale dál. Nyní si chci vybrat další slova, která se mi v
+CisteTokeny nelíbí. To udělám skrze arguemnt pattern:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ManualniNiceni }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_select}\NormalTok{(CisteTokeny, }\AttributeTok{pattern =} \FunctionTok{c}\NormalTok{(}\StringTok{"said"}\NormalTok{, }\StringTok{"like"}\NormalTok{, }\StringTok{"one"}\NormalTok{, }\StringTok{"say"}\NormalTok{, }\StringTok{"can"}\NormalTok{, }\StringTok{"go"}\NormalTok{, }\StringTok{"right"}\NormalTok{), }\AttributeTok{selection =} \StringTok{"remove"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{matrix}{%
+\subsection{Matrix?}\label{matrix}}
+
+Teď mám tedy vyčištěné tokeny a připravený korpus, vzhůru do Matrixu!
+
+Na to je příkaz následující, pak si jen vytisknem pár znaků, abychom se
+ujistili, že to je správně:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MatrixWonderland }\OtherTok{\textless{}{-}} \FunctionTok{tokens}\NormalTok{(ManualniNiceni) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{dfm}\NormalTok{()}
+\NormalTok{MatrixWonderland[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Document-feature matrix of: 1 document, 30 features (0.00% sparse) and 0 docvars.
+##               features
+## docs           hard-boiled wonderland end world haruki murakami translated
+##   Murakami.txt           1          2 104   196      3        3          3
+##               features
+## docs           japanese alfred birnbaum
+##   Murakami.txt        9      2        2
+## [ reached max_nfeat ... 20 more features ]
+\end{verbatim}
+
+Šikovnou funkcí je wordstem - stemming - odstraníme přebytečná písmenka
+a získáme tím jen kořeny slov:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MatrixWonderland }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_wordstem}\NormalTok{(MatrixWonderland, }\AttributeTok{language =}\NormalTok{ (}\StringTok{"english"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Teď se podíváme na naše top slova:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{topfeatures}\NormalTok{(MatrixWonderland, }\DecValTok{80}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      time      know     thing       old       get      look    shadow      back 
+##       348       321       271       255       249       248       238       231 
+##       now      hand      just     world       ask     skull      come      even 
+##       218       211       203       201       198       197       196       189 
+##     think      wall       way       got      mind      take       eye     light 
+##       186       184       182       177       175       172       172       171 
+##      head      want      much    someth       say       see      well       man 
+##       165       164       163       163       161       160       159       158 
+##      make       two     sound      noth      town     still  gatekeep      tell 
+##       158       153       153       149       149       146       142       140 
+##      open      long      door     never    around      seem     place        go 
+##       138       138       136       133       132       131       126       125 
+##       day      work        us      read       end grandfath     first   thought 
+##       124       123       122       120       118       117       114       114 
+##      left      turn      good      went      girl      must    system professor 
+##       113       113       112       111       111       110       110       109 
+##      wood      leav    realli      need     littl     water     three      away 
+##       105       104       104       104       102       102       101       101 
+##      next       put     anyth      mean     anoth   everyth      live      feel 
+##       100        99        99        98        97        96        96        94
+\end{verbatim}
+
+\hypertarget{vizualizace-mruxe1ux10dky-a-grafuxedky}{%
+\subsection{Vizualizace: mráčky a
+grafíky}\label{vizualizace-mruxe1ux10dky-a-grafuxedky}}
+
+Tak! A je to tady, teď už jdeme dělat mráček. Nastavíme si seed, aby se
+nám generoval stále stejně, když ho budeme chtít upravovat. Argumenty
+jsou docela jasné, v dokumentaci dobře popsané. Využíváme tu na barvení
+knihovnu RColorBrewer. Abych neměl stejný graf jako všichni, tak jsem
+využil sekvenční paletu s co nejvyšším množstvím odlišení, v tomto
+případě je barev 9.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\FunctionTok{textplot\_wordcloud}\NormalTok{(MatrixWonderland, }\AttributeTok{min\_count =} \DecValTok{100}\NormalTok{, }\AttributeTok{random\_order =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{rotation =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{color =}\NormalTok{ RColorBrewer}\SpecialCharTok{::}\FunctionTok{brewer.pal}\NormalTok{(}\DecValTok{9}\NormalTok{, }\StringTok{"YlGnBu"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{backup!_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+Pak jsem chtěl udělat ještě grafík. Dokumentace tady:
+\url{https://quanteda.io/articles/pkgdown/examples/plotting.html} Jestli
+ses dostal/a až sem, tak už to vůbec není těžké pochopit:-)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FrequencyPlot }\OtherTok{\textless{}{-}} \FunctionTok{textstat\_frequency}\NormalTok{(MatrixWonderland, }\AttributeTok{n =} \DecValTok{100}\NormalTok{)}
+\NormalTok{FrequencyPlot}\SpecialCharTok{$}\NormalTok{feature }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(FrequencyPlot, }\FunctionTok{reorder}\NormalTok{(feature, }\SpecialCharTok{{-}}\NormalTok{frequency))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(FrequencyPlot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ feature, }\AttributeTok{y =}\NormalTok{ frequency)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{backup!_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\hypertarget{odkazy-na-zdroje}{%
+\section{Odkazy na zdroje}\label{odkazy-na-zdroje}}
+
+Neseřazeno, jak jsem to pomíchal, tak to sem posílám
+
+\url{https://quanteda.io/articles/pkgdown/examples/plotting.html}~\\
+\url{https://stackoverflow.com/questions/47039236/how-to-keep-wordcloud-layout-in-r}~\\
+\url{https://stackoverflow.com/questions/26899857/self-conflicting-stopwords-in-r-tm-text-mining}
+-\textgreater{} proto quanteda, tm sucks!\\
+\url{https://quanteda.io/articles/pkgdown/comparison.html}
+-\textgreater{} proto quanteda, je prostě dobrá! na kvantitativní
+analýzu textu není nic lepšího\\
+\url{https://quanteda.io/reference/tokens.html} -\textgreater{} Jak
+používat tokeny\\
+\url{https://tutorials.quanteda.io/basic-operations/tokens/tokens_select/}
+-\textgreater{} jak vybrat a odstranit tokeny, který nechcem\\
+\url{https://quanteda.io/reference/stopwords.html} -\textgreater{}
+stopwords
+
+\url{https://quanteda.io/reference/tokens_tolower.html} -\textgreater{}
+jak hodit vše do lowercase
+
+\url{https://quanteda.io/articles/quickstart.html} -\textgreater{}
+základní návod na to, jak nahrát .txt, jak ho přečíst, jak ho převést do
+corpusu, jak pracovat s tokenama a jak udělat wordcloud případně
+vizualizovat ggplotem
+
+\url{https://quanteda.io/articles/pkgdown/examples/plotting.html}
+-\textgreater{} širší možnosti vizualizace
+
+\url{https://quanteda.io/reference/textplot_wordcloud.html}
+-\textgreater{} values pro wordcloud v quantedě
+
+\url{https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/\#display-all-brewer-palettes}
+-\textgreater{} rcolorbrewer palety
+
+\url{https://quanteda.io/articles/pkgdown/replication/digital-humanities.html}
+-\textgreater{} digital humanities porno! nástroje, který nám ukazoval
+Josef jsou skvělý v tom, jak jsou jednoduchý, ale tohle toho umí tolik!
+TOLIK!
+
+Palety textově: Sequential palettes (first list of colors), which are
+suited to ordered data that progress from low to high (gradient). The
+palettes names are : Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges,
+OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu YlOrBr,
+YlOrRd.\\
+Qualitative palettes (second list of colors), which are best suited to
+represent nominal or categorical data. They not imply magnitude
+differences between groups. The palettes names are : Accent, Dark2,
+Paired, Pastel1, Pastel2, Set1, Set2, Set3.\\
+Diverging palettes (third list of colors), which put equal emphasis on
+mid-range critical values and extremes at both ends of the data range.
+The diverging palettes are : BrBG, PiYG, PRGn, PuOr, RdBu, RdGy, RdYlBu,
+RdYlGn, Spectral
+
+\hypertarget{tipy-na-konec}{%
+\subsection{Tipy na konec}\label{tipy-na-konec}}
+
+instalace externích repositories se provádí skrz balíček ``remotes''
+
+\end{document}

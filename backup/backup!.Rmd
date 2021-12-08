@@ -2,7 +2,10 @@
 title: "Úvod do kvantitativní textové analýzy"
 author: "Tadeášek"
 date: "12/7/2021"
-output: html_document
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
 ---
 
 # *Nejlepšejší návod na vstup do Matrixu*  
